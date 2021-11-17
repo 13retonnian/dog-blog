@@ -77,7 +77,6 @@
 </template>
 <script>
 
-
 export default {
   head() {
     return {

@@ -29,4 +29,4 @@ collections:
       preview: false
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Image', name: 'image', widget: 'image' media_library: config: multiple: true}
+      - { label: 'Image', name: 'image', widget: 'image', media_library: config: multiple: true}

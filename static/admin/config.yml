@@ -2,7 +2,7 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: static/images
+media_folder: static/images/uploads
 public_folder: /images
 
 collections:
@@ -16,7 +16,7 @@ collections:
     editor:
       preview: false
     fields:
-      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Title", name: "title", widget: "string", hint:"" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Description", name: "description", widget: "string" }
       - { label: "Body", name: "body", widget: "markdown" }
@@ -47,7 +47,11 @@ collections:
                 widget: "number"
               - name: "measurement"
                 widget: "select"
-                options: ["1/8 Cup", "1/4 Cup", "1/2 Cup", "1 Cup"]
+                options:
+                  - { label: "1/8 Cup", value: "1/8" }
+                  - { label: "1/4 Cup" }
+                  - { label: "1/2 Cup" }
+                  - { label: "1 Cup" }
       - label: "Steps"
         name: "steps"
         widget: "list"
@@ -59,3 +63,31 @@ collections:
         widget: "datetime"
         default: ""
         date_format: DD/MM/YYYY
+  # Text stuff
+  - name: "code-notes"
+    label: "Code Notes"
+    folder: "content/code"
+    format: "frontmatter"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    editor:
+      preview: true
+    widget: "list"
+    fields:
+      - name: "title"
+        label: "Title"
+        widget: "string"
+      - name: "date"
+        label: "Date Published"
+        widget: "datetime"
+      - name: "markdown-edit"
+        label: "Markdown Editor"
+        widget: "markdown"
+        sanitize_preview: "true"
+      - name: "text-editor"
+        label: "Text Editor"
+        widget: "text"
+      - name: "code-editor"
+        label: "Code Editor"
+        widget: "code"
+        default_language: "javascript"

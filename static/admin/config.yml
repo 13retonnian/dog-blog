@@ -6,6 +6,7 @@ media_folder: static/images
 public_folder: /images
 
 collections:
+  # Blog
   - name: 'blog'
     label: 'Blog'
     folder: 'content/blog'
@@ -19,15 +20,51 @@ collections:
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
       - { label: 'Description', name: 'description', widget: 'string' }
       - { label: 'Body', name: 'body', widget: 'markdown' }
-  - name: 'gallery'
-    label: 'Gallery'
-    folder: 'content/gallery'
+  # Recipes
+  - name: 'recipes'
+    label: 'Rrecipes'
+    folder: 'content/recipes'
     format: 'frontmatter'
     create: true
-    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    slug: '{{slug}}'
     editor:
-      preview: false
+      preview: true
     fields:
-      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Title', name: 'title', widget: 'string', required: true }
       - { label: 'Description', name: 'description', widget: 'text' }
-      - { label: 'Image', name: 'image', widget: 'image',  multiple: true}
+      - { label: 'Image', name: 'image', widget: 'image',  required: true}
+      - { label: 'Ingredients', name: 'ingredients', widget: 'list', required: true, 
+      fields:
+        - { label: 'Ingredient', name: 'title', widget: 'string' }
+        - { label: 'Quantity', name: 'quantity', widget: 'list',
+        fields:
+        - { name: 'amount', widget: 'number' }
+        - { name: 'measurement', widget: 'select', options: ["1/8 Cup", "1/4 Cup", "1/2 Cup", "1 Cup" ]}
+        }
+      }
+      - { label: 'Steps', name: 'steps', widget: 'list', 
+      fields:
+        - { name: 'step-info', widget: 'markdown' }
+      }
+      - { label: 'Date Published', name: 'date', widget: 'datetime', default: "", date_format: DD/MM/YYYY}
+  # Profile
+ - label: "Profile"
+  name: "profile"
+  widget: "object"
+  summary: '{{fields.name}}: {{fields.birthdate}}'
+  fields:
+    - {label: "Public", name: "public", widget: "boolean", default: true}
+    - {label: "Name", name: "name", widget: "string"}
+    - label: "Birthdate"
+      name: "birthdate"
+      widget: "date"
+      default: ""
+      format: "MM/DD/YYYY"
+    - label: "Address"
+      name: "address"
+      widget: "object"
+      collapsed: true
+      fields: 
+        - {label: "Street Address", name: "street", widget: "string"}
+        - {label: "City", name: "city", widget: "string"}
+        - {label: "Postal Code", name: "post-code", widget: "string"} 

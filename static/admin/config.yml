@@ -65,7 +65,6 @@ collections:
         date_format: DD/MM/YYYY
   # Text stuff
   - name: "code-notes"
-    label: "Code Notes"
     folder: "content/code"
     format: "frontmatter"
     create: true
